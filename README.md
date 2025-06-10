@@ -64,11 +64,24 @@ Run the Server
 bash
 node server.js
 Visit in Browser
-
-arduino
 http://localhost:8001
 📂 Project Structure
-<pre> ```plaintext SmartEducationHub/ ├── server.js # Main backend logic (Node.js, Express) ├── index.html # Login page ├── signup.html # Signup page ├── mainpage.html # Student dashboard ├── admin.html # Admin dashboard ├── course.html # Course listings ├── roadmap.html # Career guidance ├── exam.html # Online test system ├── feedback.html # Feedback form ├── study_material.html # Material viewer & download ├── /css/ # Stylesheets ├── /js/ # Client-side JS └── /uploads/ # Uploaded PDFs (if saved locally) ``` </pre>
+```
+SmartEducationHub/
+├── server.js              # Main backend logic (Node.js, Express)
+├── index.html             # Login page
+├── signup.html            # Signup page
+├── mainpage.html          # Student dashboard
+├── admin.html             # Admin dashboard
+├── course.html            # Course listings
+├── roadmap.html           # Career guidance
+├── exam.html              # Online test system
+├── feedback.html          # Feedback form
+├── study_material.html    # Material viewer & download
+├── /css/                  # Stylesheets
+├── /js/                   # Client-side JS
+└── /uploads/              # Uploaded PDFs (if saved locally)
+```
 🙋‍♀️ Admin Credentials (Default)
 Username: iam_admin
 Password: admin
