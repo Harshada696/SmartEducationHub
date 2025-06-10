@@ -1,0 +1,332 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Site</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <style>
+          /* Bubbles */
+  .bubble {
+      position: absolute;
+      bottom: -150px; /* Start below the view */
+      border-radius: 50%;
+      opacity: 0.6; /* Semi-transparent */
+      animation: rise 20s infinite;
+  }
+
+  @keyframes rise {
+      0% {
+          transform: translateX(0) translateY(0);
+          opacity: 0.6;
+      }
+      100% {
+          transform: translateX(calc(-50% + 100px)) translateY(-800px); /* Rise up */
+          opacity: 0; /* Fade out */
+      }
+  }
+
+  /* Different bubble sizes and colors */
+  .bubble:nth-child(1) {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.8);
+      left: 20%;
+      animation-delay: 0s;
+  }
+
+
+  .bubble:nth-child(2) {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.6);
+      left: 50%;
+      animation-delay: 5s;
+  }
+
+  .bubble:nth-child(3) {
+      width: 30px;
+      height: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      left: 70%;
+      animation-delay: 2s;
+  }
+
+  .bubble:nth-child(4) {
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.5);
+      left: 30%;
+      animation-delay: 4s;
+  }
+
+  .bubble:nth-child(5) {
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      left: 80%;
+      animation-delay: 6s;
+  }
+  .bubble:nth-child(6) {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.9);
+      left: 80%;
+      animation-delay: 1s;
+  }
+ 
+ 
+ 
+ .new:hover{
+          box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8), 0 0 20px 4px rgba(255, 255, 255, 0.6);
+          border-color: rgba(255, 255, 255, 0.8);
+
+ }
+ 
+  
+    </style>
+</head>
+
+
+<body class="bg-gray-900 text-white" ng-app="quizApp" ng-controller="QuizController" style="background: linear-gradient(135deg, #ff6ec4, #7873f5);">
+          <div class="bubble"></div><div class="bubble"></div> <div class="bubble"></div>
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+         
+
+    <div class="container mx-auto text-center py-10" ng-show="!quizStarted && !quizSubmitted">
+        <h1 class="text-5xl font-bold mb-4">Practice Test</h1>
+        <p class="text-xl mb-6">Test yourself!</p>
+        <button class="bg-green-500 text-white font-bold py-2 px-4 rounded mb-8" style="background: linear-gradient(to right, #411fb9, #580a3a);"><a href="mainpage.html">Back to Explore More</a></button>
+        <div class="grid grid-cols-3 gap-4">
+            <div class="bg-pink-600 p-4 rounded cursor-pointer  new"   ng-click="startQuiz('Operating System Test')"   style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Operating System Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Computer Network Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Computer Network Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Database Management Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Database Management Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Data Structures Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Data Structures Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Algorithms Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Algorithms Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Software Engineering Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Software Engineering Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Artificial Intelligence Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Artificial Intelligence Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Machine Learning Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Machine Learning Test</h2>
+                <p>10 Questions</p>
+            </div>
+            <div class="bg-gray-800 p-4 rounded cursor-pointer new" ng-click="startQuiz('Cyber Security Test')" style="background: linear-gradient(to right, #715ac2, #d62693);">
+                <h2 class="text-2xl font-bold">Cyber Security Test</h2>
+                <p>10 Questions</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto text-center py-10" ng-show="quizStarted">
+        <h1 class="text-3xl font-bold mb-4">{{currentQuiz.title}}</h1>
+        <div class="bg-violet-400 p-6 rounded mb-4" ng-repeat="question in currentQuiz.questions">
+            <p class="text-xl mb-4">{{question.text}}</p>
+            <div class="text-left ml-4" ng-repeat="option in question.options">
+                <label class="block mb-2">
+                    <input type="radio" name="question{{$parent.$index}}" ng-model="question.selectedOption" ng-value="option" class="mr-2"> {{option}}
+                </label>
+            </div>
+        </div>
+        <button class="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-4" ng-click="submitQuiz()" style="background: linear-gradient(to right, #c05cb6, #460a58);">Submit Quiz</button>
+    </div>
+
+    <div class="container mx-auto text-center py-10" ng-show="quizSubmitted">
+        <h1 class="text-3xl font-bold mb-4">Your Score: {{score}} / 10</h1>
+        <button class="bg-green-500 text-white font-bold py-2 px-4 rounded mt-4" ng-click="restartQuiz()" style="background: linear-gradient(to right, #c05cb6, #460a58);">Take Another Quiz</button>
+    </div>
+
+    <script>
+        angular.module('quizApp', [])
+        .controller('QuizController', function($scope) {
+            $scope.quizStarted = false;
+            $scope.quizSubmitted = false;
+            $scope.score = 0;
+
+            const quizzes = {
+                'Operating System Test': {
+                    title: 'Operating System Test',
+                    questions: [
+                        { text: 'What is an operating system?', options: ['Software', 'Hardware', 'Firmware', 'None of the above'], correct: 'Software' },
+                        { text: 'Which of the following is an example of an operating system?', options: ['Windows', 'Linux', 'MacOS', 'All of the above'], correct: 'All of the above' },
+                        { text: 'What is the main function of an operating system?', options: ['Manage hardware', 'Manage software', 'Provide user interface', 'All of the above'], correct: 'All of the above' },
+                        { text: 'Which of the following is not a type of operating system?', options: ['Batch', 'Time-sharing', 'Distributed', 'Real-time'], correct: 'Real-time' },
+                        { text: 'What is a kernel?', options: ['Core of the OS', 'User interface', 'Application software', 'None of the above'], correct: 'Core of the OS' },
+                        { text: 'What is multitasking?', options: ['Running multiple programs', 'Running one program', 'Running no programs', 'None of the above'], correct: 'Running multiple programs' },
+                        { text: 'What is a process?', options: ['Program in execution', 'Program in memory', 'Program in storage', 'None of the above'], correct: 'Program in execution' },
+                        { text: 'What is a thread?', options: ['Lightweight process', 'Heavyweight process', 'Kernel process', 'None of the above'], correct: 'Lightweight process' },
+                        { text: 'What is virtual memory?', options: ['Memory management technique', 'Storage management technique', 'Process management technique', 'None of the above'], correct: 'Memory management technique' },
+                        { text: 'What is a file system?', options: ['Organizes files', 'Organizes processes', 'Organizes memory', 'None of the above'], correct: 'Organizes files' }
+                    ]
+                },
+                'Computer Network Test': {
+                    title: 'Computer Network Test',
+                    questions: [
+                        { text: 'What is a computer network?', options: ['Collection of computers', 'Collection of software', 'Collection of hardware', 'None of the above'], correct: 'Collection of computers' },
+                        { text: 'Which of the following is a type of network?', options: ['LAN', 'WAN', 'MAN', 'All of the above'], correct: 'All of the above' },
+                        { text: 'What is the main function of a router?', options: ['Forward data packets', 'Store data packets', 'Create data packets', 'None of the above'], correct: 'Forward data packets' },
+                        { text: 'Which of the following is a network protocol?', options: ['TCP/IP', 'HTTP', 'FTP', 'All of the above'], correct: 'All of the above' },
+                        { text: 'What is an IP address?', options: ['Unique identifier for a device', 'Unique identifier for a network', 'Unique identifier for a protocol', 'None of the above'], correct: 'Unique identifier for a device' },
+                        { text: 'What is a subnet mask?', options: ['Divides IP address into network and host', 'Divides IP address into protocol and host', 'Divides IP address into hardware and software', 'None of the above'], correct: 'Divides IP address into network and host' },
+                        { text: 'What is a MAC address?', options: ['Unique identifier for a network interface', 'Unique identifier for a network protocol', 'Unique identifier for a network device', 'None of the above'], correct: 'Unique identifier for a network interface' },
+                        { text: 'What is DNS?', options: ['Domain Name System', 'Domain Network System', 'Domain Name Service', 'None of the above'], correct: 'Domain Name System' },
+                        { text: 'What is a firewall?', options: ['Network security system', 'Network management system', 'Network storage system', 'None of the above'], correct: 'Network security system' },
+                        { text: 'What is a VPN?', options: ['Virtual Private Network', 'Virtual Public Network', 'Virtual Protected Network', 'None of the above'], correct: 'Virtual Private Network' }
+                    ]
+                },
+                'Database Management Test': {
+                    title: 'Database Management Test',
+                    questions: [
+                        { text: 'What is a database?', options: ['Collection of data', 'Collection of files', 'Collection of software', 'None of the above'], correct: 'Collection of data' },
+                        { text: 'Which of the following is a type of database?', options: ['Relational', 'NoSQL', 'Distributed', 'All of the above'], correct: 'All of the above' },
+                        { text: 'What is SQL?', options: ['Structured Query Language', 'Simple Query Language', 'System Query Language', 'None of the above'], correct: 'Structured Query Language' },
+                        { text: 'What is a primary key?', options: ['Unique identifier for a record', 'Non-unique identifier for a record', 'Composite identifier for a record', 'None of the above'], correct: 'Unique identifier for a record' },
+                        { text: 'What is normalization?', options: ['Organizing data', 'Storing data', 'Retrieving data', 'None of the above'], correct: 'Organizing data' },
+                        { text: 'What is a foreign key?', options: ['Link between tables', 'Link between columns', 'Link between rows', 'None of the above'], correct: 'Link between tables' },
+                        { text: 'What is a transaction?', options: ['A unit of work', 'A query', 'A command', 'None of the above'], correct: 'A unit of work' },
+                        { text: 'What is indexing?', options: ['Speeding up data retrieval', 'Storing data', 'Retrieving data', 'None of the above'], correct: 'Speeding up data retrieval' },
+                        { text: 'What is a view?', options: ['Virtual table', 'Physical table', 'Data file', 'None of the above'], correct: 'Virtual table' },
+                        { text: 'What is a stored procedure?', options: ['Precompiled SQL code', 'Dynamic SQL code', 'Query language', 'None of the above'], correct: 'Precompiled SQL code' }
+                    ]
+                },
+                'Data Structures Test': {
+                    title: 'Data Structures Test',
+                    questions: [
+                        { text: 'What is a data structure?', options: ['Organized data', 'Unorganized data', 'Structured data', 'None of the above'], correct: 'Organized data' },
+                        { text: 'Which of the following is a linear data structure?', options: ['Array', 'Linked List', 'Stack', 'All of the above'], correct: 'All of the above' },
+                        { text: 'What is a stack?', options: ['Last In First Out', 'First In First Out', 'Random Access', 'None of the above'], correct: 'Last In First Out' },
+                        { text: 'What is a queue?', options: ['First In First Out', 'Last In First Out', 'Random Access', 'None of the above'], correct: 'First In First Out' },
+                        { text: 'What is a binary tree?', options: ['Tree with at most two children', 'Tree with multiple children', 'Tree with no children', 'None of the above'], correct: 'Tree with at most two children' },
+                        { text: 'What is a hash table?', options: ['Data structure that uses keys', 'Data structure that uses indexes', 'Data structure that uses links', 'None of the above'], correct: 'Data structure that uses keys' },
+                        { text: 'What is a graph?', options: ['Collection of nodes', 'Collection of edges', 'Collection of vertices', 'None of the above'], correct: 'Collection of nodes' },
+                        { text: 'What is recursion?', options: ['Function calling itself', 'Function calling another function', 'Function calling a variable', 'None of the above'], correct: 'Function calling itself' },
+                        { text: 'What is a linked list?', options: ['Collection of nodes', 'Collection of arrays', 'Collection of stacks', 'None of the above'], correct: 'Collection of nodes' },
+                        { text: 'What is dynamic programming?', options: ['Optimization technique', 'Data structure technique', 'Algorithm technique', 'None of the above'], correct: 'Optimization technique' }
+                    ]
+                },
+                'Algorithms Test': {
+                    title: 'Algorithms Test',
+                    questions: [
+                        { text: 'What is an algorithm?', options: ['Step-by-step procedure', 'Random process', 'Data structure', 'None of the above'], correct: 'Step-by-step procedure' },
+                        { text: 'Which of the following is a searching algorithm?', options: ['Binary Search', 'Bubble Sort', 'Merge Sort', 'None of the above'], correct: 'Binary Search' },
+                        { text: 'Which of the following is a sorting algorithm?', options: ['Quick Sort', 'Linear Search', 'Depth First Search', 'None of the above'], correct: 'Quick Sort' },
+                        { text: 'What is time complexity?', options: ['Efficiency of an algorithm', 'Space requirement of an algorithm', 'Input requirement of an algorithm', 'None of the above'], correct: 'Efficiency of an algorithm' },
+                        { text: 'What is space complexity?', options: ['Memory usage of an algorithm', 'Time usage of an algorithm', 'Input requirement of an algorithm', 'None of the above'], correct: 'Memory usage of an algorithm' },
+                        { text: 'What is divide and conquer?', options: ['Problem-solving strategy', 'Data structure technique', 'Sorting technique', 'None of the above'], correct: 'Problem-solving strategy' },
+                        { text: 'What is dynamic programming?', options: ['Optimization technique', 'Data structure technique', 'Algorithm technique', 'None of the above'], correct: 'Optimization technique' },
+                        { text: 'What is greedy algorithm?', options: ['Optimal solution at each step', 'Random solution', 'Complete solution', 'None of the above'], correct: 'Optimal solution at each step' },
+                        { text: 'What is backtracking?', options: ['Revisiting previous states', 'Random search', 'Complete search', 'None of the above'], correct: 'Revisiting previous states' },
+                        { text: 'What is recursion?', options: ['Function calling itself', 'Function calling another function', 'Function calling a variable', 'None of the above'], correct: 'Function calling itself' }
+                    ]
+                },
+                'Software Engineering Test': {
+                    title: 'Software Engineering Test',
+                    questions: [
+                        { text: 'What is software engineering?', options: ['Application of engineering principles', 'Design of software', 'Development of software', 'All of the above'], correct: 'All of the above' },
+                        { text: 'What is a software development lifecycle?', options: ['Process of developing software', 'Process of managing software', 'Process of designing software', 'None of the above'], correct: 'Process of developing software' },
+                        { text: 'What is agile methodology?', options: ['Iterative development', 'Waterfall model', 'Spiral model', 'None of the above'], correct: 'Iterative development' },
+                        { text: 'What is a requirement?', options: ['Specification of what software should do', 'Design of software', 'Implementation of software', 'None of the above'], correct: 'Specification of what software should do' },
+                        { text: 'What is testing?', options: ['Verifying software functionality', 'Implementing software', 'Designing software', 'None of the above'], correct: 'Verifying software functionality' },
+                        { text: 'What is debugging?', options: ['Finding and fixing errors', 'Writing code', 'Designing software', 'None of the above'], correct: 'Finding and fixing errors' },
+                        { text: 'What is version control?', options: ['Managing changes to source code', 'Managing changes to data', 'Managing changes to hardware', 'None of the above'], correct: 'Managing changes to source code' },
+                        { text: 'What is a software requirement specification?', options: ['Document detailing requirements', 'Document detailing design', 'Document detailing implementation', 'None of the above'], correct: 'Document detailing requirements' },
+                        { text: 'What is software architecture?', options: ['High-level structure of software', 'Low-level structure of software', 'Implementation structure of software', 'None of the above'], correct: 'High-level structure of software' },
+                        { text: 'What is maintenance?', options: ['Modifying software after deployment', 'Developing software', 'Testing software', 'None of the above'], correct: 'Modifying software after deployment' }
+                    ]
+                },
+                'Artificial Intelligence Test': {
+                    title: 'Artificial Intelligence Test',
+                    questions: [
+                        { text: 'What is Artificial Intelligence?', options: ['Simulation of human intelligence', 'Human intelligence', 'Animal intelligence', 'None of the above'], correct: 'Simulation of human intelligence' },
+                        { text: 'What is machine learning?', options: ['Subset of AI', 'Subset of programming', 'Subset of data', 'None of the above'], correct: 'Subset of AI' },
+                        { text: 'What is deep learning?', options: ['Subset of machine learning', 'Subset of AI', 'Subset of programming', 'None of the above'], correct: 'Subset of machine learning' },
+                        { text: 'What is natural language processing?', options: ['Interaction between computers and humans', 'Interaction between animals', 'Interaction between software', 'None of the above'], correct: 'Interaction between computers and humans' },
+                        { text: 'What is computer vision?', options: ['Enabling computers to interpret visual information', 'Enabling humans to see', 'Enabling animals to see', 'None of the above'], correct: 'Enabling computers to interpret visual information' },
+                        { text: 'What is a neural network?', options: ['Model inspired by the human brain', 'Model inspired by animals', 'Model inspired by programming', 'None of the above'], correct: 'Model inspired by the human brain' },
+                        { text: 'What is reinforcement learning?', options: ['Learning through rewards and penalties', 'Learning through observation', 'Learning through instruction', 'None of the above'], correct: 'Learning through rewards and penalties' },
+                        { text: 'What is supervised learning?', options: ['Learning with labeled data', 'Learning with unlabeled data', 'Learning with mixed data', 'None of the above'], correct: 'Learning with labeled data' },
+                        { text: 'What is unsupervised learning?', options: ['Learning with unlabeled data', 'Learning with labeled data', 'Learning with structured data', 'None of the above'], correct: 'Learning with unlabeled data' },
+                        { text: 'What is a decision tree?', options: ['Model for making decisions', 'Model for data storage', 'Model for data retrieval', 'None of the above'], correct: 'Model for making decisions' }
+                    ]
+                },
+                'Machine Learning Test': {
+                    title: 'Machine Learning Test',
+                    questions: [
+                        { text: 'What is machine learning?', options: ['A subset of AI that allows systems to learn', 'A programming language', 'A hardware component', 'None of the above'], correct: 'A subset of AI that allows systems to learn' },
+                        { text: 'Which of the following is a type of machine learning?', options: ['Supervised learning', 'Unsupervised learning', 'Reinforcement learning', 'All of the above'], correct: 'All of the above' },
+                        { text: 'What is supervised learning?', options: ['Learning from labeled data', 'Learning from unlabeled data', 'Learning without any data', 'None of the above'], correct: 'Learning from labeled data' },
+                        { text: 'What is unsupervised learning?', options: ['Learning from unlabeled data', 'Learning from labeled data', 'Learning without any feedback', 'None of the above'], correct: 'Learning from unlabeled data' },
+                        { text: 'What is reinforcement learning?', options: ['Learning from rewards and penalties', 'Learning from examples', 'Learning from patterns', 'None of the above'], correct: 'Learning from rewards and penalties' },
+                        { text: 'What is a neural network?', options: ['Computational model inspired by the human brain', 'Algorithm for sorting data', 'Data structure for storing data', 'None of the above'], correct: 'Computational model inspired by the human brain' },
+                        { text: 'What is overfitting?', options: ['Model that learns noise instead of the signal', 'Model that learns the signal perfectly', 'Model that does not learn anything', 'None of the above'], correct: 'Model that learns noise instead of the signal' },
+                        { text: 'What is cross-validation?', options: ['Technique for assessing how the results of a statistical analysis will generalize', 'Technique for training a model', 'Technique for collecting data', 'None of the above'], correct: 'Technique for assessing how the results of a statistical analysis will generalize' },
+                        { text: 'What is a decision tree?', options: ['A model that makes decisions based on input features', 'A type of data structure', 'A type of algorithm', 'None of the above'], correct: 'A model that makes decisions based on input features' },
+                        { text: 'What is a support vector machine?', options: ['A supervised learning model used for classification', 'A data structure', 'A random algorithm', 'None of the above'], correct: 'A supervised learning model used for classification' }
+                    ]
+                },
+                'Cyber Security Test': {
+                    title: 'Cyber Security Test',
+                    questions: [
+                        { text: 'What is cyber security?', options: ['Protection of computer systems from theft or damage', 'Development of software', 'Random data analysis', 'None of the above'], correct: 'Protection of computer systems from theft or damage' },
+                        { text: 'What is malware?', options: ['Malicious software designed to harm systems', 'Software designed for data analysis', 'Software designed for game development', 'None of the above'], correct: 'Malicious software designed to harm systems' },
+                        { text: 'What is phishing?', options: ['Fraudulent attempt to obtain sensitive information', 'Type of software', 'Type of computer hardware', 'None of the above'], correct: 'Fraudulent attempt to obtain sensitive information' },
+                        { text: 'What is a firewall?', options: ['Network security system that monitors and controls incoming and outgoing network traffic', 'Type of computer virus', 'Type of software', 'None of the above'], correct: 'Network security system that monitors and controls incoming and outgoing network traffic' },
+                        { text: 'What is encryption?', options: ['Process of converting information into code to prevent unauthorized access', 'Process of deleting data', 'Process of backing up data', 'None of the above'], correct: 'Process of converting information into code to prevent unauthorized access' },
+                        { text: 'What is a VPN?', options: ['Virtual Private Network', 'Virtual Public Network', 'Virtual Protected Network', 'None of the above'], correct: 'Virtual Private Network' },
+                        { text: 'What is a DDoS attack?', options: ['Distributed Denial of Service attack', 'Direct Denial of Service attack', 'Distributed Data of Service attack', 'None of the above'], correct: 'Distributed Denial of Service attack' },
+                        { text: 'What is a zero-day exploit?', options: ['Attack that occurs on the same day a vulnerability is discovered', 'Attack that occurs after a vulnerability is patched', 'Random attack', 'None of the above'], correct: 'Attack that occurs on the same day a vulnerability is discovered' },
+                        { text: 'What is two-factor authentication?', options: ['Additional layer of security that requires two forms of identification', 'Type of software', 'Type of hardware', 'None of the above'], correct: 'Additional layer of security that requires two forms of identification' },
+                        { text: 'What is ransomware?', options: ['Malware that locks files until a ransom is paid', 'Type of virus', 'Type of software', 'None of the above'], correct: 'Malware that locks files until a ransom is paid' }
+                    ]
+                }
+                
+                // Add other quizzes similarly...
+
+            };
+
+            $scope.startQuiz = function(quizTitle) {
+                $scope.currentQuiz = angular.copy(quizzes[quizTitle]);
+                $scope.quizStarted = true;
+                $scope.quizSubmitted = false;
+                $scope.score = 0;
+            };
+
+            $scope.submitQuiz = function() {
+                $scope.score = 0;
+                $scope.currentQuiz.questions.forEach(function(question) {
+                    if (question.selectedOption === question.correct) {
+                        $scope.score++;
+                    }
+                });
+                $scope.quizSubmitted = true;
+                $scope.quizStarted = false;
+            };
+
+            $scope.restartQuiz = function() {
+                $scope.quizStarted = false;
+                $scope.quizSubmitted = false;
+            };
+        });
+    </script>
+</body>
+</html>

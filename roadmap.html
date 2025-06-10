@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="google-translate-customization" content="9f841e7780177523-3214ceb76f765f38-gc38c6fe6f9d06436-c">
+    </meta>
+
+    <title>Smart edu hub : Online Courses</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+  
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+ .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #111539, #272639); /* Gradient background */
+        background: fixed;
+        padding: 15px 50px;
+        box-shadow: 0 5px 15px rgb(27, 16, 16);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .navbar-logo {
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .navbar-menu {
+        display: flex;
+        gap: 25px;
+    }
+
+    .navbar-menu a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-menu a:hover {
+        color: #d4cbff; /* Light color for hover effect */
+    }
+
+    /* Profile Section */
+    .profile-menu {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .profile-icon {
+        color: #fff;
+        font-size: 24px;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background-color: #0c0c74;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        overflow: hidden;
+        min-width: 150px;
+        z-index: 10;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 10px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+    }
+   </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg   sticky-top p-0">
+        <a href="index.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            
+        </a>
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="mainpage.html" class="nav-item nav-link">Home  </a>
+                <a href="aboutus.html" class="nav-item nav-link">About us </a>
+                <a href="practic.html" class="nav-item nav-link">Practice exam</a>
+                <a href="study_material.html" class="nav-item nav-link">Study Material</a>
+                <a href="course.html" class="nav-item nav-link">Courses</a>
+                <a href="roadmap.html" class="nav-item nav-link">Roadmap</a>
+                <a href="feedback.html" class="nav-item nav-link">Feedback</a>
+                <a class="fas fa-user-circle profile-icon">
+                    <span id="username"></span> <!-- This is where the username will appear -->
+                </a>
+                <a href="/logout" id="logout">Logout</a>
+                
+                
+               
+                </div>
+
+
+                
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+
+
+    <script>
+          // Fetch the username from the server
+          fetch('/session')
+               .then(response => response.json())
+               .then(data => {
+                   // Display the username on the page
+                   document.getElementById('username').innerText = data.username || 'Guest';
+               })
+               .catch(err => console.error('Error fetching session data:', err));
+         // Logout functionality
+         document.getElementById('logout').onclick = function() {
+             fetch('/logout', { method: 'GET' }).then(() => {
+                 window.location.href = '/'; // Redirect to login page after logout
+             });
+         };
+     </script>
+     
+    <!-- Service Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row g-2 text-center">
+                <div class="col-12 wow fadeInUp" data-wow-delay="0.3s">
+                    <h1 style="color: #a33ffb;">Unlock Your Future with Smart Education Hub</h1>
+                    <p class="mb-5">Empowering students, teachers, and administrators with dynamic educational tools, interactive resources, and career-oriented guidance. Join the Smart Education Hub to explore a world of knowledge tailored for your success.</p>
+                </div>
+            </div>
+            
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item text-center pt-3 shadow">
+                        <div class="p-4">
+                            <img src="img/icon1.png" alt="" width="60px" class="mb-4">
+                            <h5 class="mb-3">Learn anything</h5>
+                            <p>Explore any interest or trending topic, take prerequisites, and advance your skills</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item text-center pt-3 shadow">
+                        <div class="p-4">
+                            <img src="img/icon2.png" alt="" width="60px" class="mb-4">
+                            <h5 class="mb-3">Save money</h5>
+                            <p>Spend less money on your learning if you plan to take multiple courses this year</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item text-center pt-3 shadow">
+                        <div class="p-4">
+                            <img src="img/icon3.png" alt="" width="60px" class="mb-4">
+                            <h5 class="mb-3">Flexible learning</h5>
+                            <p>Learn at your own pace, move between multiple courses, or switch to a different course
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item text-center pt-3 shadow">
+                        <div class="p-4">
+                            <img src="img/icon4.png" alt="" width="60px" class="mb-4">
+                            <h5 class="mb-3">Unlimited certificates</h5>
+                            <p>Earn a certificate for every learning program that you complete at no additional cost</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Service End -->
+
+<!-- Data Science Roadmap Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="https://scaler-blog-prod-wp-content.s3.ap-south-1.amazonaws.com/wp-content/uploads/2024/03/12155513/data-science-roadmap-step-by-step-guide-1024x829.webp" alt=""
+                        style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start pe-3">Data Science</h6>
+                <h1 class="mb-4" style="color: #a63ffb;">Data Science Roadmap</h1>
+                <p class="mb-4">Data Science is one of the most sought-after fields in the tech industry today. It involves using various techniques to extract valuable insights from data and make informed decisions. To embark on your Data Science journey, start with foundational skills in statistics, mathematics, and programming. Python and R are widely used programming languages in Data Science.</p>
+                <p class="mb-4">As you advance, learn about data wrangling, visualization techniques, and machine learning algorithms. Familiarize yourself with tools like Pandas, NumPy, Matplotlib, and frameworks such as Scikit-learn and TensorFlow. Understanding databases and cloud platforms will also strengthen your skill set for real-world applications.</p>
+                <p class="mb-4">Career opportunities in Data Science are abundant, ranging from Data Analyst to Machine Learning Engineer, Data Scientist, and AI Researcher. With skills in data manipulation, predictive modeling, and big data tools, you can explore roles in diverse industries, including finance, healthcare, e-commerce, and more.</p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Python & R Programming</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Data Wrangling & Visualization</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Machine Learning Algorithms</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Big Data & Cloud Platforms</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Deep Learning & AI</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Career Opportunities</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Data Science Roadmap End -->
+
+<!-- Frontend Developer Roadmap Start -->
+<div class="container-xxl py-5 pt-5 bg-light">
+    <div class="container">
+        <div class="row g-5 ">
+            <div class="col-lg-6 p-5 wow fadeInUp" data-wow-delay="0.3s">
+
+                <h1 class="mb-4" style="color: #a03ffb;">Explore the Frontend Developer Roadmap</h1>
+                <p class="mb-4">Kickstart your journey into web development by learning essential technologies such as HTML, CSS, and JavaScript. As a frontend developer, you'll build the visual and interactive parts of websites that users directly engage with.</p>
+
+                <p class="mb-4">Master frameworks like React, Angular, or Vue.js to create dynamic, responsive, and modern web applications. Get familiar with version control (Git), responsive design, browser developer tools, and performance optimization techniques to ensure smooth and fast user experiences.</p>
+
+                <p class="mb-4">By following this roadmap, you can open up career opportunities as a Frontend Developer, UI/UX Developer, or even progress toward becoming a Full Stack Developer.</p>
+
+                <a class="btn text-light py-3 px-5 mt-2" href="signup.html">Start Learning Now</a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="data:image/jpeg;base64,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" alt=""
+                        style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Frontend Developer Roadmap End -->
+
+
+
+<!-- DBMS Roadmap Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="https://cdn.sketchbubble.com/pub/media/catalog/product/optimized1/3/f/3f40bdc058b61f0fec2e79774fd88d949e0465841ba2fff7d1b67a763e930ec7/database-administrator-dba-slide3.png" alt=""
+                        style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start pe-3">Database Addministrator</h6>
+                <h1 class="mb-4" style="color: #df3ffb;">Database Addministrator</h1>
+                <p class="mb-4">Database Management Systems (DBMS) are essential for organizing, storing, and retrieving data efficiently. To begin your journey in DBMS, start by learning about relational database concepts, SQL (Structured Query Language), and how databases are designed. Understanding data models such as ER (Entity-Relationship) models is critical for structuring data.</p>
+                <p class="mb-4">As you progress, focus on advanced topics like normalization, indexing, and query optimization. Learn about popular database management systems like MySQL, PostgreSQL, Oracle, and NoSQL databases such as MongoDB for non-relational data. Additionally, understanding database security and management of large-scale distributed systems will help you build robust solutions.</p>
+                <p class="mb-4">Career opportunities in DBMS include roles like Database Administrator, Data Architect, SQL Developer, and System Analyst. With DBMS skills, you can work in a variety of sectors, including IT services, e-commerce, finance, and healthcare, managing large volumes of critical data for businesses and organizations.</p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>SQL & Relational Databases</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Normalization & Indexing</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>NoSQL & Distributed Databases</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Database Security</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Query Optimization</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Career Opportunities</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- DBMS Roadmap End -->
+
+<!-- Cloud Engineer Roadmap Start -->
+<div class="container-xxl py-5 pt-5 bg-light">
+    <div class="container">
+        <div class="row g-5 ">
+            <div class="col-lg-6 p-5 wow fadeInUp" data-wow-delay="0.3s">
+
+                <h1 class="mb-4" style="color: #651e69;">Explore the Cloud Engineer Roadmap</h1>
+                <p class="mb-4">Start your journey into cloud computing by learning the fundamentals of cloud platforms like AWS, Microsoft Azure, or Google Cloud. As a cloud engineer, you'll design, develop, and manage scalable cloud solutions to meet modern business needs.</p>
+
+                <p class="mb-4">Master key cloud concepts such as virtualization, storage, networking, and security. Familiarize yourself with tools for Infrastructure as Code (IaC), such as Terraform or CloudFormation, and containerization technologies like Docker and Kubernetes.</p>
+
+                <p class="mb-4">By following this roadmap, you can unlock career opportunities as a Cloud Engineer, Cloud Architect, or DevOps Engineer, helping organizations leverage the power of cloud technology.</p>
+
+                <a class="btn text-light py-3 px-5 mt-2" href="course.html">Start Learning Now</a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="https://i.pinimg.com/originals/f3/23/15/f32315e3529f53ed0e2608c26530fc6c.jpg" alt=""
+                        style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Cloud Engineer Roadmap End -->
+
+<!-- Software Engineer Roadmap Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="data:image/png;base64,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" alt=""
+                        style="object-fit: cover;">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                <h6 class="section-title bg-white text-start pe-3">Software Engineer</h6>
+                <h1 class="mb-4" style="color: #9a3ffb;">Software Engineer Roadmap</h1>
+                <p class="mb-4">Embarking on a career as a software engineer requires a solid foundation in computer science principles and programming languages. Start your journey by learning fundamental programming languages like Python, Java, or C++. Understanding data structures and algorithms is crucial for writing efficient code and solving complex problems.</p>
+                <p class="mb-4">As you advance, focus on software development methodologies such as Agile and DevOps. Familiarize yourself with version control systems like Git and learn about web development frameworks (e.g., React, Angular) and backend technologies (e.g., Node.js, Django). Additionally, understanding databases, APIs, and cloud services will enhance your ability to create scalable applications.</p>
+                <p class="mb-4">Career paths for software engineers include roles like Frontend Developer, Backend Developer, Full Stack Developer, and DevOps Engineer. With software engineering skills, you can work in diverse industries, developing applications and systems that drive innovation and efficiency.</p>
+                <div class="row gy-2 gx-4 mb-4">
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Programming Languages</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Data Structures & Algorithms</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Web Development</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Version Control (Git)</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Cloud Services</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="mb-0"><i class="fa fa-arrow-right me-2"></i>Career Opportunities</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Software Engineer Roadmap End -->
+
+
+<!-- DevOps Engineer Roadmap Start -->
+<div class="container-xxl py-5 pt-5 bg-light">
+    <div class="container">
+        <div class="row g-5 ">
+            <div class="col-lg-6 p-5 wow fadeInUp" data-wow-delay="0.3s">
+
+                <h1 class="mb-4" style="color: #8d3ffb;">Explore the DevOps Engineer Roadmap</h1>
+                <p class="mb-4">Begin your DevOps journey by learning the fundamentals of development and operations, focusing on automation, continuous integration, and continuous deployment (CI/CD). As a DevOps engineer, you'll bridge the gap between development and operations teams to streamline software delivery.</p>
+
+                <p class="mb-4">Master tools like Jenkins, Docker, Kubernetes, and cloud platforms such as AWS, Azure, or Google Cloud. Get familiar with Infrastructure as Code (IaC) tools like Terraform, configuration management tools such as Ansible, and monitoring tools like Prometheus and Grafana.</p>
+
+                <p class="mb-4">By following this roadmap, you can open up career opportunities as a DevOps Engineer, Site Reliability Engineer (SRE), or Cloud Engineer, helping organizations improve efficiency and scalability in their software delivery pipelines.</p>
+
+                <a class="btn text-light py-3 px-5 mt-2" href="course.html">Start Learning Now</a>
+            </div>
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 400px;">
+                <div class="position-relative h-100">
+                    <img class="img-fluid position-absolute w-100 h-100" src="https://bilginc.com/editorFiles/b3df80ab.jpg" alt=""
+                        style="object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- DevOps Engineer Roadmap End -->
+
+
+   <!-- FAQ Start  -->
+<div class="container-xxl py-5 category">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h1 class="mb-5">Frequently Asked Questions</h1>
+        </div>
+        <div class="row g-2">
+            <div class="col-12">
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            What is the Smart Education Hub?
+                        </button>
+                      </h2>
+                      <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            The Smart Education Hub is a dynamic and interactive educational platform designed to enhance learning for students, teachers, and administrators. It integrates academic resources, course materials, study aids, assessment tools, and career-oriented guidance. It aims to streamline educational processes while promoting personalized learning experiences.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How does the Smart Education Hub benefit students?
+                        </button>
+                      </h2>
+                      <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            The Smart Education Hub benefits students by offering centralized access to a variety of learning resources, such as lecture notes, practice exams, and interactive study tools. It also features career exploration modules in fields like Data Analytics, Software Development, and Network Security, helping students align their learning with professional aspirations.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            What subjects are covered in the Smart Education Hub?
+                        </button>
+                      </h2>
+                      <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            The Smart Education Hub covers a wide range of technical subjects, including Operating Systems, Database Management Systems, and Computer Networks. The platform is designed to continuously evolve, adding more subjects and resources to meet diverse learning needs.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            How do teachers use the Smart Education Hub?
+                          </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                            Teachers can use the Smart Education Hub to organize their course content, create assessments, and track student progress. The platform provides analytics that allow educators to personalize their teaching strategies and ensure that students are engaging with the material effectively.
+                            </div>
+                        </div>
+                      </div>
+                      <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Can the Smart Education Hub help students prepare for their careers?
+                          </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                          <div class="accordion-body">
+                            Yes, the Smart Education Hub includes a career-oriented section designed to help students explore various career paths. It provides tools and resources to guide students in areas like Data Analytics, Software Development, and Network Security, offering real-world insights into these fields and helping them develop the necessary skills for success.
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FAQ End  -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-white mb-3">Quick Link</h4>
+                    <p><a class="text-light" href="about.html">About Us</a></p>
+                    <p><a class="text-light" href="feedback.html">Contact Us</a></p>
+                    <p><a class="text-light" href="">Privacy Policy</a></p>
+                    <p><a class="text-light" href="">Terms & Condition</a></p>
+                    <p><a class="text-light" href="">FAQs & Help</a></p>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, Bangalore, Karnataka</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 8683045908</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>smart eduhub@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h4 class="text-white mb-3">Subscribe to our Newsletter</h4>
+                    <p>Subscribe now and join our growing community of learners committed to lifelong education! </p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <form action="#">
+                            <input class="form-control border-0 w-100 py-3 ps-4 pe-5" type="email"
+                                placeholder="Your email" required>
+                            <button type="submit"
+                                class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2"><a
+                                    href="mailto:keertidvcorai@gmail.com">Subscribe</a></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" href="mainpage.html">Secret Coder</a>, All Right Reserved.
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

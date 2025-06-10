@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="css/toolkit-startup.min.css" rel="stylesheet">
+  <link href="css/animate.css" rel="stylesheet">
+  <link href="css/homepage.css" rel="stylesheet">
+  
+  <script type="text/paperscript" canvas="tpcanvas" style="width:400px;height:400px;" src="js/tppaper.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400italic|Work+Sans:300,400,500,600|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script type="text/javascript" src="js/paper-full.min.js"></script>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  
+  
+
+  <style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+       
+    }
+   
+
+    /* Navbar Styling */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: linear-gradient(135deg, #111539, #272639); /* Gradient background */
+        background: fixed;
+        padding: 15px 50px;
+        box-shadow: 0 5px 15px white;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .navbar-logo {
+        color: #fff;
+        font-size: 24px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .navbar-menu {
+        display: flex;
+        gap: 25px;
+    }
+
+    .navbar-menu a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 16px;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-menu a:hover {
+        color: #ffcccb; /* Light color for hover effect */
+    }
+
+    /* Profile Section */
+    .profile-menu {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .profile-icon {
+        color: #fff;
+        font-size: 24px;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background-color: #fff;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        overflow: hidden;
+        min-width: 150px;
+        z-index: 10;
+    }
+
+    .dropdown-menu a {
+        display: block;
+        padding: 10px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: #f0f0f0;
+    }
+
+    /* Display the dropdown on hover */
+    .profile-menu:hover .dropdown-menu {
+        display: block;
+    }
+
+    /* Main Content Styling */
+    #main {
+        text-align: center;
+        padding: 100px 0;
+    }
+
+    #tagline {
+        margin-top: 20px;
+        color: #fff;
+    }
+
+    #scroll-down-btn {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+    }
+            /* CSS for hover effect on course cards */
+.course-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 50;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 1000px; 
+            max-width: 1000px;
+            height: 600px; 
+            max-height: 600px; 
+        }
+
+        .modal iframe {
+            width: 100%;
+            height: 90%;
+        }
+        .searchmyclass{
+            margin-top: 20px;
+        }
+  </style>
+</head>
+<body ng-controller="CourseController" ng-app="SmartEduHubApp">
+
+
+
+<div id="message-box" style="display: none; padding: 8px; text-align: center;"></div>
+
+<div class="container" id="main">
+  <canvas id="tpcanvas" resize="" hidpi="off"></canvas>
+  <div>
+    <div id="clouds3" class="clouds"></div>
+    <div id="clouds1" class="clouds"></div>
+    <div id="clouds2" class="clouds"></div>
+  </div>
+  <div id="nav">
+    <nav class="navbar navbar-default" style="background-color:rgba(0, 0, 255, 0); border-color:rgba(0, 0, 255, 0); ">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#links" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+       
+        <a class="navbar-brand" id="logo"style="padding: 23px;" style="margin-left: 20px;" style="float: left;"></a>
+      </div>
+      <div id="links" class="homepage collapse navbar-collapse" aria-expanded="false" style="top: 0px;">
+        <ul class="nav navbar-nav navbar-homepage">
+          <li ng-click="scrollToContent()"><a href="">About Us</a></li>
+          <li><a href="exam.html">Practice Exam</a></li>
+          <li><a href="study_material.html" >Study Material</a></li>
+          <li><a href="democode.html" >PYQP</a></li>
+          
+          <li><a href="course.html">Course</a></li>
+          <li><a href="roadmap.html">RoadMap</a></li>
+          
+          <li><a href="feedback.html">Feedback</a></li>
+         
+          <li class="fas fa-user-circle profile-icon">
+            <span id="username"></span> <!-- This is where the username will appear -->
+        </li>
+        <li><a href="/logout" id="logout">Logout</a></li>
+        
+          
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+</div>
+  <img src="images/moon.png" id="moon" alt="Moon Image">
+  <div id="tagline">
+    <h1>Learn with SmartEduHub <span id="text"> </span><i class="cursor"></i></h1>
+    <button class="btn btn-danger btn-lg get-started-btn get_started_x"><a href="course.html">Get Started</a></button>
+  </div>
+</div>
+<div id="scroll-down-btn" ng-click="scrollToContent()">
+  <img src="images/scroll-arrow.png" width="16px">
+</div>
+
+<div style="position:absolute; top:100%; padding-top:100px;left:0px;right:0px;" id="hp-spacer">
+  <script>
+    // Define the AngularJS application
+    var app = angular.module('SmartEduHubApp', []);
+  
+    // Define the CourseController
+    app.controller('CourseController', ['$scope', '$location', '$anchorScroll', function($scope, $location, $anchorScroll) {
+        // Function to scroll to the content
+        $scope.scrollToContent = function() {
+            $location.hash('hp-spacer'); // Set the hash to the ID of the section
+            $anchorScroll(); // Scroll to the section
+        };
+    }]);
+  </script>
+     <script>
+       // Fetch the username from the server
+       fetch('/session')
+            .then(response => response.json())
+            .then(data => {
+                // Display the username on the page
+                document.getElementById('username').innerText = data.username || 'Guest';
+            })
+            .catch(err => console.error('Error fetching session data:', err));
+      // Logout functionality
+      document.getElementById('logout').onclick = function() {
+          fetch('/logout', { method: 'GET' }).then(() => {
+              window.location.href = '/'; // Redirect to login page after logout
+          });
+      };
+  </script>
+  
+
+ 
+  
+<script type="text/javascript">
+
+$(function(){
+  $("#clouds2").animate({'background-position-x':'-=10000'}, 500000, 'linear').animate({'background-position-x':'-=10000'}, 500000, 'linear');
+  $("#clouds3").animate({'background-position-x':'10000'}, 1000000, 'linear').animate({'background-position-x':'20000'}, 1000000, 'linear');
+
+  resized();
+  show_text(0);
+
+
+ 
+});
+function resized(){
+  $(".clouds").css("top", $(window).height() - 120);
+
+  if($(window).width() < 1000){
+    $("#moon").hide();
+  }else{
+    $("#moon").show();
+  }
+
+  if($(window).width() < 650){
+    $("#tagline").css({"width":"300px"})
+  }else{
+    $("#tagline").css({"width":"500px"})
+  }
+
+  if($(window).width() < 450){
+    $("#links").css({"top":"50px"})
+  }else{
+    $("#links").css({"top":"0px"})
+  }
+}
+
+var text_list = " for free!";
+
+function show_text(index){
+  var text = text_list.slice(0, index);
+  $("#text").html(text);
+  setTimeout(function(){ show_text(index+1); }, parseInt(Math.random()*600));
+}
+
+
+
+</script>
+<div class="container">
+  <div class="row app-align-center">
+    <div class="col-sm-6 hidden-xs">
+      <div style="height:355px;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbrkHSFgZvJXtg-WR3wkqo_Jllfd7o5Z0yiw&s" class="img-responsive" style="position:absolute;z-index:-1;margin-left:-50px;width: 800px;">
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <h6 class="text-muted text-uppercase">What is SmartEduHub?</h6>
+      <h3 class="m-t-0">SmartEduHub is the most effective way to learn .</h3>
+      <p class="lead m-b-md">Smart Edu Hub , a revolutionary platform designed to enhance the
+        learning experience for students and educators. <a href="">SmartEduHub is a product family of edclub.</a></p>
+
+      <a class="btn btn-primary get_started2" href="course.html">See  Our Courses</a>
+      <br>
+    </div>
+  </div>
+</div>
+<div class="block block-secondary app-block-marketing-grid">
+  <div class="container text-center">
+
+    <div class="row m-b-lg">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-lg-6 col-lg-offset-3">
+        <h6 class="text-muted text-uppercase">Inside TypingClub</h6>
+        <h3 class="m-t-0 m-b">All the reasons to start learning how to Learn right now</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="images/stars.svg" style="width:180px; padding-top:25px; ">
+        <p><strong>It's a game.</strong> An engaging and interactive experience while you are learning how to type.</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="images/hands.svg" style="width:170px; ">
+        <p><strong>Proper hand posture guide.</strong> Will show you the correct hand posture on every key as you type.</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="images/badge.svg" style="width:90px;">
+        <p><strong>Levels, Badges and Stars.</strong> All the reasons to keep you going, and build your muscle memory.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="images/accessibility.svg" style="width:80px; ">
+        <p><strong>Accessibility.</strong> .</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="images/experience.svg" style="width:120px; ">
+        <p><strong>Interactive experience.</strong> A full range of experiences from games, videos and different typing challenges makes learning fun.</p>
+      </div>
+      <div class="col-sm-4 p-x-md m-b-lg">
+        <img class="m-b" src="images/replay-icon.png" style="width:100px; padding: 15px 0; ">
+        <p><strong>Voice over.</strong> Once you turn it on, every word is read out loud as you are typing each word. </p>
+      </div>
+    </div>
+    </div>
+</div>
+<div class="block block-secondary bg-gray three-details">
+  <div class="container">
+    <h5 style="text-align:center; text-transform:uppercase; color:#999; padding-bottom:30px;">Explore Courses</h5>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 col-sm-6 hidden-xs">
+                <img src="data:image/jpeg;base64,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" style="width:100%">
+            </div>
+            <div class="col-md-12 col-sm-6 more-lesson">
+                <h3><a href="">Operating System</a></h3>
+                <p> This course covers the fundamental concepts of operating systems, including process management, memory management, file systems, and device management. <a href="https://www.geeksforgeeks.org/what-is-an-operating-system/">Learn more.</a></p>
+            </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="row">
+            <div class=" col-md-12 col-sm-6 hidden-xs">
+                <img src="https://mail.google.com/mail/u/0?ui=2&ik=55f7ab54ad&attid=0.24&permmsgid=msg-f:1813155916933817410&th=19299fb32f3ce442&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ-jxSNFipQ5Z6gBq_xsWYbBe5G7zLpAJzMruaC1NYSDMdSaZoCi_W42Qzzk13zUEZ2_BgWrgJRCWqyoy_0nyRgcKyHwMCfX-I5yy9TKcwgrElqtppBHvamsZPQ&disp=emb&realattid=ii_m2d5bbh224" style="width:100%">
+            </div>
+            <div class="col-md-12 col-sm-6 more-lesson">
+                <h3><a href="">Python</a></h3>
+                <p>Jungle Junior is a specialized lesson plan created with young learners in mind. <a href="https://www.geeksforgeeks.org/what-is-an-operating-system/">Learn more.</a></p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 col-sm-6 hidden-xs">
+                <img src="https://mail.google.com/mail/u/0?ui=2&ik=55f7ab54ad&attid=0.27&permmsgid=msg-f:1813155916933817410&th=19299fb32f3ce442&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ9SAnVHOVBrt6wG6R-bhHQQYuc-Cur9b9W1DyAetpaLOhXG2CygPCO6RYGDebXhtUTH9nM4aW8v_9ZE_ZsP-YGWTpxsyt832BxllodGPH7bC6MYV95Kao7Puj0&disp=emb&realattid=ii_m2d5bbh626" style="width:100%">
+            </div>
+            <div class="col-md-12 col-sm-6 more-lesson">
+              <h3 style="font-size: 27px;"><a href="">Chat gpt knowledge </a> </h3>
+                <p>Learn basic of CHat gpt it is a AI open AI model</p>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <h5 style="text-align:center; text-transform:uppercase; color:#999; padding-bottom:30px;">Animated Story Typing Series</h5>
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+            <div class=" col-md-12 col-sm-6 hidden-xs">
+                <img src="https://mail.google.com/mail/u/0?ui=2&ik=55f7ab54ad&attid=0.40&permmsgid=msg-f:1813155916933817410&th=19299fb32f3ce442&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ8QfaGfBuBrgT75QwIN7UyaCX4NHALxbN_huIKdr1wWbEtOLnnB62IjtyWCZlLlOsPg5T_XQ6BBu3tbBhVF7Pe6aBOo2Ls_WRKbJGxV1RuI31T2cY4KOkPLLLY&disp=emb&realattid=ii_m2d5bbi340" style="border:1px solid rgba(0, 0, 0, .2);border-style:inset;width:100%">
+            </div>
+            <div class="col-md-12 col-sm-6 more-lesson">
+                <h3><a href="">Cyber Security </a></h3>
+                <p>Lauren is nervous before her big flight test. Join her and her helpful friend on a journey to find the confidence she needs to go solo. <a href="https://www.geeksforgeeks.org/what-is-an-operating-system/">Learn more.</a></p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 col-sm-6 hidden-xs">
+                <img src="https://mail.google.com/mail/u/0?ui=2&ik=55f7ab54ad&attid=0.42&permmsgid=msg-f:1813155916933817410&th=19299fb32f3ce442&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ8XNSfqZCWiwl5WRT6iIpg4HzthdpUe6GX-vTYw-DOHTx8WKjB36O2lWzVVOXoMx0C6uOO-oyj8XSYfcA91MlFILch5_KMXFjelZZ3frJNJHxKdpucrUWe1ZqU&disp=emb&realattid=ii_m2d5bbi742" style="border:1px solid rgba(0, 0, 0, .2);border-style:inset;width:100%">
+            </div>
+            <div class="col-md-12 col-sm-6 more-lesson">
+                <h3>Security Asppects</h3>
+                <p>Travel with Ava on a magical adventure as she explores her mysterious friend's world, and learns more about her own in the process. <a href="https://www.geeksforgeeks.org/what-is-an-operating-system/">Learn more.</a></p>
+            </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="row">
+            <div class="col-md-12 col-sm-6 hidden-xs">
+                <img src="https://mail.google.com/mail/u/0?ui=2&ik=55f7ab54ad&attid=0.11&permmsgid=msg-f:1813155916933817410&th=19299fb32f3ce442&view=fimg&fur=ip&sz=s0-l75-ft&attbid=ANGjdJ-HWvCyDKaQncJ7YAqzZVwRbYtfqJr7nLsUVBGfDKIyCtQ8CVcWvZJNQDrqTLEuA-7nrBSOILoKbHSKxIiDo-cBb-2NzK6rIngCsdB8yHzmEToZo6Zzs7DP3Ho&disp=emb&realattid=ii_m2d5bbgb11" style="border:1px solid rgba(0, 0, 0, .2);border-style:inset;width:100%">
+            </div>
+            <div class="col-md-12 col-sm-6 more-lesson">
+                <h3><a href="">Design Interiror</a></h3>
+                <p>Join Alex on an out-of-this world journey as he helps his mysterious new friend get back home. <a href="https://www.geeksforgeeks.org/what-is-an-operating-system/">Learn more.</a></p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+<br>
+<footer>
+  <div class="block block-inverse block-inverse-dark block-secondary app-code-block">
+    <div class="container">
+      <div class="row app-align-center">
+        <div class="col-sm-4 hidden-xs ">
+          <img src="images/district.svg" width="240px" >
+        </div>
+  
+        <div class="col-sm-8">
+          <h6 class="text-muted text-uppercase">The amazing</h6>
+          <h3 class="m-t-0">\SmartEduClub Collage Edition</h3>
+          <p class="lead m-b-md text-muted">SmartEduHub Collage Edition is the most powerful and popular software used by teachers, schools and districts. </p>
+          <a href="mainpage.html" class="btn btn-default btn-lg btn-borderless">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</footer>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/toolkit.min.js"></script>
+
+</body>
+</html>

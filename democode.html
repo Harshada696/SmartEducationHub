@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previous Year Question Papers</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        /* CSS styles including the gradient background and container styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right ,#dc2743, #cc2366, #bc1888);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Navigation bar styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+            padding: 15px 0;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-link {
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 18px;
+            transition: background 0.3s ease;
+            border-radius: 5px;
+            margin: 0 10px;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: linear-gradient(to right, #833ab4, #fd1d1d, #fcb045);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #fff;
+            font-size: 2em;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .tabs, .subjects {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-button, .subject-button {
+            background: linear-gradient(to right, #f7971e, #ffd200);
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            border-radius: 25px;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .tab-button:hover, .subject-button:hover {
+            background: linear-gradient(to right, #ff4b2b, #ff416c);
+            transform: translateY(-5px);
+        }
+
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: linear-gradient(to right, #ff6ec4, #7873f5);
+            color: white;
+            text-align: center;
+            width: 120px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: linear-gradient(to right, #7873f5, #ff6ec4);
+            transform: translateY(-3px);
+        }
+
+        .question-papers {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .question-papers img {
+            width: 80%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            border: 4px solid #614d7c;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            animation: zoomIn 0.8s ease;
+        }
+
+        .question-papers p {
+            color: #fff;
+            font-size: 18px;
+            margin-top: -10px;
+        }
+
+        /* Keyframe animations for fadeIn and zoomIn effects */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#practice-exam" class="nav-link">Practice Exam</a>
+        <a href="#pvq" class="nav-link">PVQ</a>
+        <a href="#study-material" class="nav-link">Study Material</a>
+        <a href="#roadmap" class="nav-link">Roadmap</a>
+        <a href="#profile" class="nav-link">Profile</a>
+        <a href="#logout" class="nav-link">Logout</a>
+    </nav>
+
+    <div class="container" id="mainPage">
+        <h1>Previous Year Question Papers</h1>
+       
+        <!-- Tabs for CA1, CA2, MSE, ESE -->
+        <div class="tabs">
+            <button class="tab-button" onclick="showSubjects('CA1')">CA1</button>
+            <button class="tab-button" onclick="showSubjects('CA2')">CA2</button>
+            <button class="tab-button" onclick="showSubjects('MSE')">MSE</button>
+            <button class="tab-button" onclick="showSubjects('ESE')">ESE</button>
+        </div>
+    </div>
+
+    <div class="container" id="subjectPage" style="display:none;">
+        <button class="back-button" onclick="goBack()">Back</button>
+        <h2 id="assessmentTitle"></h2>
+        <div class="subjects" id="subjects">
+            <!-- Subjects will be dynamically loaded here -->
+        </div>
+    </div>
+
+    <div class="container" id="questionPage" style="display:none;">
+        <button class="back-button" onclick="goBackToSubjects()">Back</button>
+        <div class="question-papers" id="questionPapers">
+            <!-- Question papers will be dynamically displayed here -->
+        </div>
+    </div>
+
+    <script>
+        // Data for subjects and question papers
+        const assessments = {
+            "CA1": ["DBMS", "Operating Systems", "Computer Networks", "System Security and Privacy", "Cloud and Parallel Computing"],
+            "CA2": ["DBMS", "Operating Systems", "Computer Networks", "System Security and Privacy", "Cloud and Parallel Computing"],
+            "MSE": ["DBMS", "Operating Systems", "Computer Networks", "System Security and Privacy", "Cloud and Parallel Computing"],
+            "ESE": ["DBMS", "Operating Systems", "Computer Networks", "System Security and Privacy", "Cloud and Parallel Computing"]
+        };
+
+        const questionPapers = {
+            "CA1": {
+                "DBMS": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Operating Systems": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Computer Networks": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "System Security and Privacy": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Cloud and Parallel Computing": ["dbms_ca1.png", "dbms2_ca1.png"]
+            },
+            "CA2": {
+                "DBMS": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Operating Systems": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Computer Networks": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "System Security and Privacy": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Cloud and Parallel Computing": ["dbms_ca1.png", "dbms2_ca1.png"]
+            },
+            "MSE": {
+                "DBMS": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Operating Systems": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Computer Networks": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "System Security and Privacy": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Cloud and Parallel Computing": ["dbms_ca1.png", "dbms2_ca1.png"]
+            },
+            "ESE": {
+                "DBMS": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Operating Systems": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Computer Networks": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "System Security and Privacy": ["dbms_ca1.png", "dbms2_ca1.png"],
+                "Cloud and Parallel Computing": ["dbms_ca1.png", "dbms2_ca1.png"]
+            }
+        };
+
+        // Show subjects for selected assessment
+        function showSubjects(assessment) {
+            document.getElementById('mainPage').style.display = 'none';
+            document.getElementById('subjectPage').style.display = 'block';
+
+            const assessmentTitle = document.getElementById('assessmentTitle');
+            const subjects = document.getElementById('subjects');
+            assessmentTitle.innerText = assessment + " Subjects";
+
+            subjects.innerHTML = ""; // Clear previous subjects
+            assessments[assessment].forEach(subject => {
+                const button = document.createElement('button');
+                button.className = "subject-button";
+                button.innerText = subject;
+                button.onclick = function() {
+                    showQuestionPapers(assessment, subject);
+                };
+                subjects.appendChild(button);
+            });
+        }
+
+        // Show question papers for selected subject
+        function showQuestionPapers(assessment, subject) {
+            document.getElementById('subjectPage').style.display = 'none';
+            document.getElementById('questionPage').style.display = 'block';
+
+            const questionPaperDiv = document.getElementById('questionPapers');
+            const papers = questionPapers[assessment][subject];
+            questionPaperDiv.innerHTML = `<h2>${subject} - ${assessment}</h2>`;
+
+            papers.forEach((paper, index) => {
+                questionPaperDiv.innerHTML += `<img src="${paper}" alt="Question Paper ${index + 1}"><p>Question Paper ${index + 1}</p>`;
+            });
+        }
+
+        // Go back to the main tab selection page
+        function goBack() {
+            document.getElementById('subjectPage').style.display = 'none';
+            document.getElementById('mainPage').style.display = 'block';
+        }
+
+        // Go back to subjects page
+        function goBackToSubjects() {
+            document.getElementById('questionPage').style.display = 'none';
+            document.getElementById('subjectPage').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

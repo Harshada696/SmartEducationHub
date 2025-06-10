@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studyMaterialApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose Your Study Material</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script> <!-- AngularJS Library -->
+    <style>
+          /* Custom glow effect on hover */
+          .glow-input {
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+        .glow-input:hover {
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8), 0 0 20px 4px rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.8);
+            border: none;
+        }
+        .glow-input:focus {
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 1), 0 0 20px 4px rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 255, 255, 1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-purple-800 to-purple-500 min-h-screen flex items-center justify-center" ng-controller="StudyMaterialController">
+    <div class="bg-white bg-opacity-20 backdrop-blur-lg rounded-lg shadow-lg p-6 w-full max-w-5xl">
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-xl font-bold text-white">Choose Your Study Material</h1>
+            <i class="bg-pink-500 text-white px-4 py-2 rounded-lg mt-4"><a href="mainpage.html">Back to Home Page</a></i>
+        </div>
+
+        <!-- Search Bar with Glow Effect -->
+        <div class="mb-4">
+            <input type="text" ng-model="searchQuery" placeholder="Search study materials..."
+                class="w-full p-2 rounded bg-white bg-opacity-50 text-gray-900 placeholder-gray-700 glow-input" />
+        </div>
+
+        <!-- Container for two tables side by side -->
+        <div class="grid grid-cols-2 gap-4">
+            <!-- First Table -->
+            <div>
+                <h2 class="text-lg font-bold text-white mb-2">Category 1</h2>
+                <table class="min-w-full bg-white bg-opacity-20 backdrop-blur-lg rounded-lg" id="category1-table">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 text-left text-sm font-medium text-gray-900">File ID</th>
+                            <th class="py-2 px-4 text-left text-sm font-medium text-gray-900">File Name</th>
+                            <th class="py-2 px-4 text-left text-sm font-medium text-gray-900">File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="file in category1Files | filter:searchQuery" ng-class="{'bg-white bg-opacity-10': $even, 'bg-white bg-opacity-20': $odd}">
+                            <td class="py-2 px-4 text-sm text-gray-900">{{ file.id }}</td>
+                            <td class="py-2 px-4 text-sm text-gray-900">{{ file.filename }}</td>
+                            <td class="py-2 px-4 text-sm text-gray-900">
+                                <a ng-href="/download/{{ file.id }}" class="bg-purple-500 text-white px-4 py-2 rounded-lg mt-4" target="_blank">Download</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Second Table -->
+            <div>
+                <h2 class="text-lg font-bold text-white mb-2">Category 2</h2>
+                <table class="min-w-full bg-white bg-opacity-20 backdrop-blur-lg rounded-lg" id="category2-table">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 text-left text-sm font-medium text-gray-900">File ID</th>
+                            <th class="py-2 px-4 text-left text-sm font-medium text-gray-900">File Name</th>
+                            <th class="py-2 px-4 text-left text-sm font-medium text-gray-900">File</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="file in category2Files | filter:searchQuery" ng-class="{'bg-white bg-opacity-10': $even, 'bg-white bg-opacity-20': $odd}">
+                            <td class="py-2 px-4 text-sm text-gray-900">{{ file.id }}</td>
+                            <td class="py-2 px-4 text-sm text-gray-900">{{ file.filename }}</td>
+                            <td class="py-2 px-4 text-sm text-gray-900">
+                                <a ng-href="/download/{{ file.id }}" class="bg-purple-500 text-white px-4 py-2 rounded-lg mt-4" target="_blank">Download</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // AngularJS application and controller definition
+        angular.module('studyMaterialApp', [])
+            .controller('StudyMaterialController', ['$scope', '$http', function($scope, $http) {
+                $scope.category1Files = [];
+                $scope.category2Files = [];
+
+                // Fetch files from the server
+                $http.get('/api/files').then(function(response) {
+                    const data = response.data;
+
+                    // Categorize files into two categories
+                    data.forEach((file, index) => {
+                        if (index % 2 === 0) {
+                            $scope.category1Files.push(file);
+                        } else {
+                            $scope.category2Files.push(file);
+                        }
+                    });
+                }, function(error) {
+                    console.error('Error fetching files:', error);
+                });
+            }]);
+    </script>
+</body>
+</html>

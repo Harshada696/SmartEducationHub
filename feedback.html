@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Patrick Hand', cursive;
+            background: linear-gradient(135deg, #ff6ec4, #7873f5); /* Pink to violet gradient */
+          
+        }
+
+        /* Container to hold the background and form */
+        .container {
+            display: flex;
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        /* Left side background image */
+        .background-image {
+            flex: 1;
+            background-image: url("image.png"); /* Replace with your actual image URL */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Right side feedback form */
+        .form-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+               /* Bubbles */
+               .bubble {
+            position: absolute;
+            bottom: -150px; /* Start below the view */
+            border-radius: 50%;
+            opacity: 0.6; /* Semi-transparent */
+            animation: rise 20s infinite;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateX(0) translateY(0);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateX(calc(-50% + 100px)) translateY(-800px); /* Rise up */
+                opacity: 0; /* Fade out */
+            }
+        }
+
+        /* Different bubble sizes and colors */
+        .bubble:nth-child(1) {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            left: 20%;
+            animation-delay: 0s;
+        }
+        .bubble:nth-child(19) {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            left: 10%;
+            animation-delay: 7s;
+        }
+
+        .bubble:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.6);
+            left: 50%;
+            animation-delay: 5s;
+        }
+
+        .bubble:nth-child(3) {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.7);
+            left: 70%;
+            animation-delay: 2s;
+        }
+
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.5);
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(5) {
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 80%;
+            animation-delay: 6s;
+        }
+        .bubble:nth-child(6) {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 80%;
+            animation-delay: 1s;
+        }
+        .bubble:nth-child(7),.bubble:nth-child(14) {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 10%;
+            animation-delay: 8s;
+        }
+        .bubble:nth-child(8) ,.bubble:nth-child(13){
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 50%;
+            animation-delay: 5s;
+        }
+        .bubble:nth-child(9),.bubble:nth-child(11) {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 30%;
+            animation-delay: 7s;
+        }
+        .bubble:nth-child(10),.bubble:nth-child(12) {
+            width: 90px;
+            height: 90px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 30%;
+            animation-delay: 8s;
+        }
+        .bubble:nth-child(15) {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 30%;
+            animation-delay: 7s;
+        }
+        .bubble:nth-child(16) {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 30%;
+            animation-delay: 5s;
+        }
+        .bubble:nth-child(18) {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 30%;
+            animation-delay: 5s;
+        }
+        .bubble:nth-child(17) {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.9);
+            left: 30%;
+            animation-delay: 12s;
+        }
+        .transparent-div {
+        background-color: rgba(255, 255, 255, 0.8); /* White background with 80% opacity */
+        border: 2px solid rgba(183, 39, 116, 0.2); /* Border with 20% opacity */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(72, 16, 70, 0.2); /* Subtle shadow for effect */
+    }
+    button{
+          background-color: linear-gradient(to right, #c05cb6, #460a58);
+    }
+    </style>
+</head>
+<body>
+          <div class="bubble"></div><div class="bubble"></div> <div class="bubble"></div>
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+          <div class="bubble"></div> <div class="bubble"></div><div class="bubble"></div>
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+          <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+          <div class="bubble"></div><div class="bubble"></div>
+    <div class="container transparent-div ">
+        <!-- Left side background image -->
+       <!-- Left side background image -->
+<div class="background-image" style="flex: 1; display: flex; justify-content: center; align-items: center;">
+    <img src="https://d1ymz67w5raq8g.cloudfront.net/Pictures/780xany/4/8/6/144486_7C.png" 
+         style="width: 100%; height: 100%; object-fit: cover;">
+</div>
+
+     <!-- Right side feedback form -->
+<div class="form-container">
+    <!-- Upload Video Button -->
+    <button id="feedbackButton" class="bg-purple-500 text-white px-4 py-2 rounded-lg mb-4 flex items-center justify-center gap-2" style="background: linear-gradient(to right, #c05cb6, #460a58);">
+        <i class="fas fa-upload"></i> Upload Video
+    </button>
+
+    <!-- Feedback Form (Hidden by default) -->
+    <div id="feedbackForm" class="hidden relative bg-white border-2 border-gray-300 rounded-lg shadow-lg p-8 bg-opacity-50" style="width: 400px; height: 450px;">
+        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 rounded-t-lg w-3/4 h-10 flex items-center justify-center">
+            <div class="bg-gray-400 w-12 h-6 rounded-b-lg"></div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <h1 class="text-xl mb-4">Video Summarizer!</h1>
+
+            <!-- Custom File Upload Button -->
+            <label for="videoUpload" class="cursor-pointer bg-gray-200 border border-gray-300 p-2 rounded-lg flex items-center justify-center gap-2 w-full">
+                <i class="fas fa-cloud-upload-alt"></i> Choose File
+            </label>
+            <input type="file" id="videoUpload" class="hidden" required/>
+
+            <!-- Textarea for Summary -->
+            <textarea id="feedbackInput" class="w-full h-48 border border-gray-300 p-2 mt-4" placeholder="Your Summary will generate here..." required></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button id="submitFeedback" class="bg-pink-500 text-white px-4 py-2 rounded-lg mt-4 flex items-center justify-center gap-2" style="background: linear-gradient(to right, #c05cb6, #460a58);">
+            <i class="fas fa-paper-plane"></i> Submit
+        </button>
+    </div>
+</div>
+
+
+    <script>
+        // Toggle the visibility of the feedback form
+        document.getElementById('feedbackButton').addEventListener('click', function() {
+            document.getElementById('feedbackForm').classList.toggle('hidden');
+        });
+
+        // Handle form submission
+        document.getElementById('submitFeedback').addEventListener('click', function() {
+            const name = document.getElementById('nameInput').value;
+            const feedback = document.getElementById('feedbackInput').value;
+
+            // Send data to the server using fetch
+            fetch('/submit-feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, feedback })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Feedback submitted successfully!');
+                    // Clear the form after submission
+                    document.getElementById('nameInput').value = '';
+                    document.getElementById('feedbackInput').value = '';
+                    document.getElementById('feedbackForm').classList.add('hidden'); // Hide the form
+                     // Redirect to mainpage.html immediately after the alert
+                window.location.href = 'mainpage.html';
+                } else {
+                    alert('Failed to submit feedback. Please try again.');
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
