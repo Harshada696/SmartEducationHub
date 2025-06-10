@@ -4,7 +4,7 @@ SmartEducationHub is a comprehensive web platform for university students, offer
 
 ---
 
-## 🚀 Features
+## 🚀 Features 
 
 - 👤 **User Authentication**
   - Secure login/signup for students
