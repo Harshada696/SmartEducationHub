@@ -105,6 +105,6 @@ Feedback is logged in the feedback table.
 Basic validation and session protection are implemented.
 
 📧 Contact
-For queries or suggestions, feel free to connect on GitHub.
+For queries or suggestions, feel free to connect on LinkedIn(https://www.linkedin.com/in/harshadamundwadkar-tech-student).
 
 
