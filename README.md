@@ -50,8 +50,6 @@ SmartEducationHub is a comprehensive web platform for university students, offer
 Install Dependencies
 
 bash
-Copy
-Edit
 npm install
 Configure MySQL Database
 
@@ -64,37 +62,14 @@ Update credentials in server.js
 Run the Server
 
 bash
-Copy
-Edit
 node server.js
 Visit in Browser
 
 arduino
-Copy
-Edit
 http://localhost:8001
 📂 Project Structure
-plaintext
-Copy
-Edit
-SmartEducationHub/
-├── server.js              # Main backend logic (Node.js, Express)
-├── index.html             # Login page
-├── signup.html            # Signup page
-├── mainpage.html          # Student dashboard
-├── admin.html             # Admin dashboard
-├── course.html            # Course listings
-├── roadmap.html           # Career guidance
-├── exam.html              # Online test system
-├── feedback.html          # Feedback form
-├── study_material.html    # Material viewer & download
-├── /css/                  # Stylesheets
-├── /js/                   # Client-side JS
-└── /uploads/              # Uploaded PDFs (if saved locally)
+<pre> ```plaintext SmartEducationHub/ ├── server.js # Main backend logic (Node.js, Express) ├── index.html # Login page ├── signup.html # Signup page ├── mainpage.html # Student dashboard ├── admin.html # Admin dashboard ├── course.html # Course listings ├── roadmap.html # Career guidance ├── exam.html # Online test system ├── feedback.html # Feedback form ├── study_material.html # Material viewer & download ├── /css/ # Stylesheets ├── /js/ # Client-side JS └── /uploads/ # Uploaded PDFs (if saved locally) ``` </pre>
 🙋‍♀️ Admin Credentials (Default)
-txt
-Copy
-Edit
 Username: iam_admin
 Password: admin
 📌 Notes
